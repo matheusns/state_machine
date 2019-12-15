@@ -1,0 +1,8 @@
+<launch>
+    <!-- Defines the logging level output -->
+    <env name="ROSCONSOLE_CONFIG_FILE" value="$(find state_machine)/config/rosconsole.conf"/>
+
+	<group ns="/state_machine">
+		<node name="sp_state_machine_node" pkg="state_machine" type="sp_state_machine.py" output = "screen" />
+	</group>
+</launch>
