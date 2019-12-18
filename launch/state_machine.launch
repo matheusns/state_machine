@@ -2,7 +2,22 @@
     <!-- Defines the logging level output -->
     <env name="ROSCONSOLE_CONFIG_FILE" value="$(find state_machine)/config/rosconsole.conf"/>
 
+	<!-- USB cam node -->
+	<include file ="$(find usb_cam)/launch/usb_cam.launch">
+		<arg name = "view" value = "false"/>
+		<!--    <arg name="calibration" value="$(arg calibration)"/>-->
+	</include>
+
+	<!-- Strawberry detector node -->
+	<include file ="$(find strawberry_detector)/launch/strawberry_detector.launch"/>
+
+	<!-- Dobot magician node -->
+	<group ns="/dobot_magician">
+		<node name = "pick_n_place_node" pkg = "dobot" type = "DobotServer" args = "ttyUSB0" output = "screen" />
+	</group>
+
+	<!-- State machine node -->
 	<group ns="/state_machine">
-		<node name="sp_state_machine_node" pkg="state_machine" type="sp_state_machine.py" output = "screen" />
+		<node name = "sp_state_machine_node" pkg = "state_machine" type = "sp_state_machine.py" output = "screen" />
 	</group>
 </launch>
